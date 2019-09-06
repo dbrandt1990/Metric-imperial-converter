@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>metric to imperial converter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>Imperial/Metric Converter</h1>
+    <hr />
+    <form action="" method="GET">
+      <input id="input" type="text" placeholder="mi/km/cm/in/m/ft" />
+      <input id="convert" type="submit" value="Convert" />
+    </form>
+    <script
+      src="https://code.jquery.com/jquery-2.2.1.min.js"
+      integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(function() {
+        $("#convertForm").submit(function() {
+          event.preventDefault();
+          $.ajax({
+            url: "/api/convert",
+            type: "get",
+            data: $("#convertForm").serialize(),
+            success: function(data) {
+              $("#result").text(data.string || data);
+              $("#jsonResult").text(JSON.stringify(data));
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
